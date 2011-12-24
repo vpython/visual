@@ -1,0 +1,170 @@
+This file was not kept up to date after June 2006, but there are brief
+summaries in the "Recent developments" section of vpython.org.
+
+Visual 4.beta2
+================================================================================
+	NEW FEATURES:
+	* The Windows build is no longer dependent on Gtk+; it uses the Win32
+		API directly.  Windows 98,ME,XP,2K are supported.  Windows 95 is _not_
+		supported, and will not be for the forseeable future.  The official
+		Microsoft end of life date for Windows 98 and ME is coming soon 
+		(30 June 2006).  Support by VPython for those versions of Windows is
+		deprecated.
+		This build depends on a third-party library, libsigc++, which is licensed
+		under the GNU Lesser General Public License, version 2.1.  (which was also
+		the case for Gtk).  To comply with the terms of this license, the source
+		code for libsigc++ is available from our download site alongside the
+		Windows package.
+	* Ring objects support translucency. (but it is somewhat expensive)
+	* Graphs of points utilize the new points object
+	* (Actually present since 4.beta0) Label objects' text supports Unicode
+		strings.  On Linux/Unix, any unicode character supported by the selected
+		font should be displayed correctly.  This feature is not implemented for
+		Windows.  Additionally, the default text font for Linux is the system
+		font (rather than courier), rendered using Freetype 2.
+	* The colorsliders demo includes an alpha (opacity) slider
+	* The gdots object uses the new points object for rendering cleaner point
+	    graphs
+
+	BUGS FIXED:
+	* Programs that track UI events should exit cleanly when the user closes
+		a window, rather than hang.
+	* A universe consiting of only one instance of a points, curve, convex, faces,
+		or ellipsoid will be displayed properly.
+	* Boxes with negative dimentions are rendered correctly
+	* renderable.shininess = 1.0 is no longer a synonym for diabling shininess
+	  (shininess is maximized in this case)
+	* Label object color properties are applied correctly
+	* Copyright notices (license.txt and LIBSIGC_COPYING.txt) have been added to
+	  the Windows distribution.
+	* (Linux/UNIX only) label.text returns a properly formed unicode string
+
+Visual 4.beta1.1 (this was not announced)
+================================================================================
+	BUGS FIXED:
+	* The Gtk+ libs in the Windows build were updated with less-stripped versions
+	* Compiled object files were removed from the source tarball.
+
+Visual 4.beta1
+================================================================================
+	NEW FEATURES:
+	* A new points object:
+		class points(cvisual.renderable):
+			property pos: Nx3 Numeric double array
+			property color: Nx4 Numeric float array
+			property size: double; the size of every point in the array, in
+				either pixels or world-space units
+			property type: "world" or "screen"; Defines whether a points object's
+				size property is defined in world coordinates or screen coordinates
+			property antialias: boolean; If true, points are rounded.
+				otherwise, they are square.
+		Caveats:
+		if "GL_ARB_point_parameters" in scene.info():
+			then type = "world" will work.
+		else:
+			type is silently ignored and considered to be "screen"
+		There is an implementation-defined size range for either round or
+		square points, which is not easily visible to client programs at this
+		time.  Specifying a size outside this range will cause it to be
+		sliently clamped internally to whatever range that the hardware supports.
+
+	
+	BUGS FIXED:
+	* The Gtk runtime shipped with VPython on Windows uses the Gtk-Wimp (Windows
+		native widgets) theme by default.
+	* Several DLL's in the Gtk runtime have been fixed
+	* Texture data of NxM is automatically interpreted as NxMx1
+	* Setting curve.blue works correctly
+	* Thin curve's color is rendered correctly
+	
+	KNOWN ISSUES:
+	* The Windows build will only run on Windows XP (Pro and Home) and 2000.
+
+Visual 4.beta0
+================================================================================
+	NEW FEATURES:
+	* A menu bar with some simple functions
+	* New mouse interaction mode "pan", selectable by the user
+	* Most objects support an "alpha" color property, that controls 
+		transparency.  This also makes foo.color a 4-tuple (RGBA)
+	* Most objects support a "shininess" property, that controls specular 
+		highlighting (value between 0 and 1, exactly 0 or 1 disable it)
+	* Most objects can have their lighting explicitly turned off 
+		(foo.lit = False)
+	* Simple texturing support (see examples/textest.py)
+	* Advanced lighting support, including spotlights, attenuation, and local
+		 (non-infinity) sources (no demo as yet, see help(light))
+	* frame.scale linearly scales all of the frame's children's dimensions
+		Negative values are allowed.
+	
+	BUGS FIXED:
+	* Translucent labels occlude each other in a spatially-correct way
+
+Visual 3.2.4
+===============================================================================
+	BUGS FIXED:
+	* Ensure that the last point of a curve is always rendered.
+	* diff_angle with (0,0,0) vectors returns 0 instead of pi/2
+	* Documention corrected to state frame.objects includes only visible objects.
+	* display.exit = 0 again works (only that window closes)
+
+Visual 3.2.1
+===============================================================================
+	BUGS FIXED:
+	* Fix an undefined reference error in cvisualmodule.so
+
+Visual 3.2.0
+===============================================================================
+	NEW FEATURES:
+	* New stereo mode: "crosseyed".  It is just like 'passive', but reversed
+		left-to-right.
+	* Added the dependancy list for Genoo systems to INSTALL.txt.
+	
+	BUGS FIXED:
+	* A crash that affected users of some NVIDIA Quadro video cards on Windows
+		has been fixed.
+	* Work around sizeof(float*) < sizeof(int) on AMD64 systems.
+
+Visual 3.1.1
+===============================================================================
+	NEW FEATURES:
+	* There is no longer a restriction on rotating past the up axis, such that
+		the scene may be rotated upside-down under user control.
+	* The MS Windows builds include packages for Python 2.3 and 2.4, upgrades
+		Boost.Python to version 1.32, and adds Numarray 1.1.1.
+	* The MS Windows installer has been componentized, and will respect an
+		existing installation of Numeric or Numarray.	
+
+	BUGS FIXED:
+	* A resource leak in the label object has been fixed.
+	* configure option --with-gtkgl-prefix works correctly (only affects *nix
+		and OSX users).
+	* The bounds check for display.up and display.forward is more robust.
+	* A crash in the free function rotate( vector, angle, axis) has been fixed.
+	* Thin curve objects are rendered with the correct color in anaglyph stereo
+		rendering modes.
+	* The "vpython" script is working again.
+	
+	KNOWN ISSUES:
+	* "make install" is broken on Windows.  Use the generated
+		MakeVPython.iss Inno Setup file to build an installer and run it.
+
+Visual 3.1.0
+===============================================================================
+	NEW FEATURES:
+	* This is the first release that has been produced from our new CVS layout.
+		This enables a more deterministic release process that will reduce
+		regressions.
+	* Numarray support has been added.  You can enable support for Numeric and
+		Numarray in the same build, and select between them at runtime.  See
+		INSTALL.txt for details.
+
+	BUGS FIXED:
+	* The autotools support for MS Windows has been significantly improved.
+	* Nx2 arrays are supported for convex.pos and faces.pos
+	* faces.color is initialized in the correct order.  This bug prevented you
+		from initializing faces.color to an array in the constructor.
+	* {primitive,frame}.rotate( pos=foo, origin=bar) works as expected.
+	* The shutdown procedure is kinder to the shell when using Bash.
+	* Several uninitialized value errors were fixed in the display class when
+		using the GTK+ backend.

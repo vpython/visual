@@ -1,0 +1,12 @@
+prefix=/home/jonathan/Projects/vpython_basic_gtkmm
+
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: vpython
+Description: C++ engine for VPython.
+Requires: gtkglextmm-1.0
+Version: 3.0
+Libs: -L${libdir} -lvpython-gtk2 -lvpython-core
+Cflags: -I${includedir}

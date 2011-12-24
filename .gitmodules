@@ -1,0 +1,3 @@
+[submodule "docs"]
+	path = docs
+	url = git://github.com/vpython/vpython.docs.git

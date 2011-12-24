@@ -1,0 +1,18 @@
+Original author of the Visual module:
+David Scherer <dscherer@visualsciences.net>
+
+Other members of the original design team at Carnegie Mellon:
+David Andersen
+Ruth Chabay <rwchabay@unity.ncsu.edu>
+Ari Heitner
+Ian Peters
+Bruce Sherwood <basherwo@unity.ncsu.edu>
+
+Current maintainers:
+Jonathan Brandmeyer <jbrandmeyer@users.sourceforge.net>
+Bruce Sherwood <basherwo@unity.ncsu.edu>
+
+Other contributors to the Visual module:
+Hugh Fisher <hugh.fisher@anu.edu.au> (stereo code)
+Shaun Press <shaun.press@anu.edu.au> (the pyramid and ellipsoid objects)
+John Zelle  <john.zelle@wartburg.edu> (stereo code)
