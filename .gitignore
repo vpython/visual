@@ -11,9 +11,9 @@ aclocal.m4
 config.guess
 config.sub
 configure
+docs
 install-sh
 ltmain.sh
-Makefile.in
 Makefile
 missing
 mkinstalldirs
