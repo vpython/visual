@@ -176,13 +176,14 @@ II.   Configuration
 	because Visual has to be linked to an appropriate Python, so read below.
 	
 	There have been significant changes in where 3rd-party software is stored on 
-	Ubuntu 9.04. You probably want to use /usr/bin/python2.6. To configure, do this
-	in a folder parallel to vpython-core2 (or whatever the source folder is named:
+	Ubuntu 9.04. You probably want to use /usr/bin/python2.7. Suppose you have
+	uncompressed the tarball into a folder named "Source". In a folder parallel
+	to "Source" execute something like this:
 	
-	PYTHON=/usr/bin/python2.6 ../vpython-core2/configure --prefix=/usr/local
+	PYTHON=/usr/bin/python2.7 ../source/configure --prefix=/usr/local
 	
-	You will also need to copy vpython-core2/src/gtk2/site-packages.pth to
-	/usr/lib/python2.6/dist-packages to put /usr/lib/python2.6/site-packages
+	You will also need to copy Source/src/gtk2/site-packages.pth to
+	/usr/lib/python2.7/dist-packages to put /usr/lib/python2.7/site-packages
 	on the Python search path.
 	
 	In src/gtk2 there is a simple non-autoconf makefile for Ubuntu 8 as of Nov. 2008.
@@ -224,7 +225,7 @@ II.   Configuration
 	on-line documentation.
 	
 	Here is a specific example of case (c):
-	PYTHON=/usr/bin/python2.6 ../vpython-core2/configure --prefix=/usr/local
+	PYTHON=/usr/bin/python2.7 ../Source/configure --prefix=/usr/local
 	(This would make sense only if python has /usr/local/lib/site-packages on its 
 	search path.)
 	

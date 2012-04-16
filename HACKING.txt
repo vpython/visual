@@ -1,10 +1,9 @@
-VPython CVS is maintained at cvs.sourceforge.net:/cvsroot/visualpython
-Anonymous access is via pserver, as user anonymous, empty password.
+VPython CVS is maintained at github.com/vpython, where there
+are two components: visual contains the main files, and
+vpython.docs contains the documentation files.
 
-Mainline development is taking place in the "vpython-core2" module.
-
-Set the version number appropriately in configure.ac, 
-and in the first line of __init__.py.
+   Set the version number appropriately in configure.ac, 
+   and in the first line of __init__.py.
 
 Windows and Mac builds are now special to them; 
 see VCBuild/VCBuild.txt and MAC-OSX.txt.
@@ -21,10 +20,8 @@ seem to work, due to issues with java licensing. The easy thing to do is
 simply to use the package manager to install java, but to download Eclipse
 from eclipse.org. 
 	
-If you use eclipse, choose "CVS Repositories". In the upper right
-corner of the CVS Repositories frame, click on the icon for "Add CVS
-Repository". Specify host as visualpython.cvs.sourceforge.net and
-path as /cvsroot/visualpython. Choose extssh as the connection type.
+If you use eclipse, choose "Git Repositories" and click the Git icon
+that has the hint "Clone a Git Repository and add the clone to this view".
 
 For Linux:
 
@@ -33,7 +30,7 @@ It is unlikely to be kept up to date, but it gives an example of the basic
 elements of what the rather complex autoconf machinery needs to produce.
 
 Makefile.in, configure, and the helper programs for them are not maintained
-in CVS. You will have to run the autogen.sh script after a fresh checkout to 
+in the respository. You will have to run the autogen.sh script after a fresh checkout to 
 create configure. You need to execute "chmod +x autogen.sh" in order to be 
 able to execute ./autogen.sh. 
 
@@ -45,9 +42,6 @@ The result of executing autogen.sh is to produce the following files:
 
 The source distribution is built with "make dist-bzip2". 
 "make bzip" is also supported.
-
-Please provide patches in unified diff format, as generated with
-$ cvs diff -u
 
 This project uses tabs for indentation in C++, and spaces in Python.
 
