@@ -1,12 +1,21 @@
-HOW TO BUILD VISUAL 5 USING CARBON
+HOW TO BUILD VISUAL USING CARBON
 Install XcodeTools from the optional materials on the Mac installation DVD.
-Installing XcodeTools automatically installs the large number of individualvp
+Installing XcodeTools automatically installs the large number of individual
 components also listed on the DVD.
 
-Install Python for the Mac ("MacPython") from python.org.
+Install a 32-bit Python for the Mac ("MacPython") from python.org.
 There is already a /usr/bin/python that at the moment is up to date, but
 because this isn't always the case, and because the Python community seems to
 strongly prefer it, we will base Visual on MacPython, which is /usr/local/bin/python.
+
+VPython for the Mac is based on the Carbon framework because it proved impossible
+to use Cocoa, due to threading issues. Unfortunately, Carbon is not supported
+for 64-bit applications, so if and when no 32-bit version of Python is available
+it may be necessary to revert to a Unix/X-windows solution, with the disadvantage
+of not having the standard Mac look and feel.
+
+CREATING A VPYTHON INSTALLER
+See the information in src/mac/PackageMaker/packaging.txt
 
 PYTHON INSTALLERS
 The standard Python installers at python.org for the Mac install into
@@ -57,18 +66,14 @@ Manchester, contact: http://www.cs.man.ac.uk/~toby/gpc/".
 
 BUILD VISUAL
 You need Boost libraries for the Mac. See below for how to build the Boost libraries.
-(The following may not work, because up-to-date files are not also provided in CVS:
-In the dependencies section of CVS, unzip the zip file. You should name the resulting 
-folder in dependencies "boost_files", containing boost (the include files), 
-win_libs (for Windows), and mac_libs (for Mac).)
 
 In src/mac, execute sudo make setup.
 This creates a build directory mbuild parallel to the CVS files, and creates links
 from /Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/site-packages to
-the visual directory in the CVS files.
+the visual directory in the git files.
 
 In the mbuild directory, execute sudo make install to build and install Visual.
-This creates cvisual.so in the CVS site-packages/visual directory, which is
+This creates cvisual.so in the git site-packages/visual directory, which is
 linked as explained above, ready to run.
 
 In site-packages/vidle, execute "python MacBuildApp.py build" to build an app to drive VIDLE,
@@ -77,7 +82,7 @@ to be not very robust and the resulting launcher has been modified and is found 
 src/mac/PackageMaker/VIDLE_launcher.zip. 
 For more details, see src/mac/PackageMaker/packaging.txt.
 
-Run compilevisual.py (top of CVS) to compile all Visual Python files.
+Run compilevisual.py (top of git files) to compile all Visual Python files.
 
 Another option to compile all of the .py files in a directory is this:
 	import compileall
@@ -91,24 +96,39 @@ Be sure to set the project status to require OSX 10.4 and above.
 
 BUILDING BOOST LIBRARIES
 The Boost libraries were built by downloading the source.
-cd to the Boost directory and execute 
+cd to the Boost directory and execute
 
-./bootstrap.sh --with-toolset=gcc --with-python-version=3.1 --with-python-root=/Library/Frameworks/Python.framework/Versions/3.1 --with-python=python3.1 --with-libraries=python,signals,thread
+The Python 3.2 installer places the Python includes in
+/Library/Frameworks/Python.framework/Versions/3.2/include/python3.2m instead of ....python3.2.
+This leads to building a failure in building the Boost libraries. You need to make a copy of
+include/python3.2m -> include/python3.2 in order for the following procedure to work.
+
+./bootstrap.sh --with-toolset=gcc --with-python-version=3.2 --with-python-root=/Library/Frameworks/Python.framework/Versions/3.2 --with-python=python3.2 --with-libraries=python,signals,thread
 
 to create the bjam tool and project-config.jam.
 
-In the file project-config.jam, change "using gcc ;" to "using gcc : 4.0 : g++-4.0 ;"
+Run the new python in a terminal and see what compiler was used to build it. If it was 4.0, do this:
+   In the file project-config.jam, change "using gcc ;" to "using gcc : 4.0 : g++-4.0 ;"
+If it was 4.2, do this:
+   In the file project-config.jam, change "using gcc ;" to "using gcc : 4.2 : g++-4.2 ;"
+The purpose is to build Boost libraries using the same compiler used to build Python and Visual.
+Early versions of Python used 4.0, later ones 4.2. 
 
-The purpose is to build Boost libraries using the same g++-4.0 compiler used to build Visual, which
-should enable Visual to run on OSX 10.4 (for which g++-4.2 doesn't work). 
-
-Now execute ./bjam to build the Boost libraries.
+Now execute ./bjam to build the Boost libraries for 32-bit Python.
 
 The files you want will be in stage/lib.
 Move the following files to dependencies/boost_files/mac_libs:
 libboost_python.a
 libboost_signals.a
 libboost_thread.a
+
+Note that address-model=32 architecture=x86 instruction-set=i386 can be used with bjam to force 32-bit compilation.
+
+Alas, despite many permutations of trying to build Boost and VPython for the 32-bit version of Python3.2, I get these errors:
+ld: warning: in wrap_vector.o, file was built for i386 which is not the architecture being linked (x86_64)
+ld: warning: in ../VPython_GitHub//dependencies/boost_files/mac_libs/libboost_python.a, file was built for unsupported file format which is not the architecture being linked (x86_64)
+Up to and including Python3.1, the Python executoable was built for ppc and i386.
+The "32-bit" version of Python3.2 was built for x86_64 and i386, which apparently has consequences for building Boost and VPython.
 
 In the past the following was used, but it seems neither necessary nor sufficient with Python 2.7:
 ---------------------
