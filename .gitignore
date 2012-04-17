@@ -4,6 +4,8 @@
 *.swp
 *.so
 *.os
+*.xml
+*.DS_Store
 .sconf_temp
 .sconsign
 config.log
@@ -30,3 +32,5 @@ dependencies/boost_files
 dependencies/boost_files2.5
 site-packages/vidle2/build
 site-packages/visual/*.in
+src/mac/PackageMaker/*.pmdoc
+src/mac/PackageMaker/*.pmdoc/*.xml
