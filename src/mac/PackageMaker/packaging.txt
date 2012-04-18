@@ -4,6 +4,18 @@ To use the Apple Package Manager to create an installer, create a folder named "
 at the same level as vpython-core2, for assembling an installer for Python 3 (if you
 are assembling an installer for Python 2.7, name the folder "stage2"). 
 
+If you have to start from scratch to build the VIDLE launcher, do this:
+  The VIDLE launcher was created starting from the IDLE launcher found in the
+  /Applications/Python X.Y folder. Make a copy of this IDLE launcher.
+  If you right-click (ctrl-click) IDLE, you can gain access to the contents
+  of what is actually a folder. The Python script Resources/idlemain.py was 
+  edited with TextEdit to change idlelib.PyShell to vidle.PyShell. 
+  Doubleclick info.plist to use the plist editor to change IDLE to VIDLE
+  in "Executable file", "Bundle identifier", and "Bundle name".
+  Change the name of MacOS/IDLE to MacOS/VIDLE.
+  You don't need to change IDLE to VIDLE in the icon file names (*.icns).
+  Finally, change the name of the IDLE launcher to VIDLE.
+
 Place in stage:
 	Files that will go to site-packages:
 		vis and visual folders (from vpython-core2/site-packages)
@@ -18,18 +30,7 @@ Place in stage:
 	VPython/docs folder
 	VPython/VIDLE launcher (unzip from src/mac/PackageMaker/VIDLE_launcher.zip)
 
-Clean out irrelevant files from these folders (e.g. CVS folders, make files).
-
-The VIDLE launcher was created starting from the IDLE launcher found in the
-/Applications/Python X.Y folder. Make a copy of this IDLE launcher.
-If you right-click (ctrl-click) IDLE, you can gain access to the contents
-of what is actually a folder. The Python script Resources/idlemain.py was 
-edited with TextEdit to change idlelib.PyShell to vidle.PyShell. 
-Doubleclick info.plist to use the plist editor to change IDLE to VIDLE
-in "Executable file", "Bundle identifier", and "Bundle name".
-Change the name of MacOS/IDLE to MacOS/VIDLE.
-You don't need to change IDLE to VIDLE in the icon file names (*.icns).
-Finally, change the name of the IDLE launcher to VIDLE.
+Clean out irrelevant files from these folders (e.g. make files).
 
 Ctrl-click the stage folder and choose Get Info.
 Expose Sharing & Permissions.
