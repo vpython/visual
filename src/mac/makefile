@@ -59,10 +59,9 @@ clean :
 	rm *.o
 	rm *.d
 
-# This command to be run from the vpython-core2/src/mac
+# This command to be run from within the /src/mac folder
 setup : 
 	mkdir -p ../../../VPython_GitHub/../mbuild
 	ln -sfh $(abspath makefile) ../../../mbuild/makefile
-	ln -sfh $(abspath ../../site-packages/visual) $(SITE_PACKAGES)visual
 
 -include *.d

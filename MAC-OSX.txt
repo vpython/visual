@@ -34,16 +34,15 @@ that the new Python is in /Library/Frameworks/Python.framework/Versions/3.1:
    (if necessary, "sudo rm Current" if there already is one)
    sudo ln -s 3.1 Current
 
-You should also add the following to .profile (in your home directory), so that
-executing "python" in a Terminal will run the newly installed Python:
-   PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
-   export PATH
-
 INSTALLING MODULES NEEDED BY VISUAL
 Next you need to install numpy. You may find an installer for it. Otherwise:
 Download the source for numpy and unpack it (http://www.scipy.org/Download).
 In the numpy directory, execute "sudo python setup.py install".
 This installs the numpy module which includes needed header files.
+
+You need to copy into /Library/Frameworks/Python.framework/Versions/X.Y/lib/pythonX.Y/site-packages
+the git folders vis, visual, and vidle from the git site-packages folder. If you're building for
+Python 3.x, copy vidle3 to vidle.
 
 For Visual 5.3 and later, you need the Python modules FontTools, ttfquery, and Polygon.
 Be sure to get ttfquery 1.0.4 or later.
@@ -51,6 +50,7 @@ Polygon is available at http://polygon.origo.ethz.ch/download
 Currently, use the Polygon 2.0.1 binary for Python 2.6, which works with Python 27;
 I have not succeeded in building Polygon from source. Nor did I succeed with Python 3.1
 but got a Mac binary from the Polygon maintainer Joerg Raedler <joerf@j-raedler.de>.
+This also works with Python 3.2.
 	
 Note The following copyright notice applies to the Polygon module when included in
 the VPython distribution concerning Polygon:
@@ -65,18 +65,17 @@ GPC Commercial Use Licence is obtained from The University of
 Manchester, contact: http://www.cs.man.ac.uk/~toby/gpc/".
 
 BUILD VISUAL
+Copy into 
+
 You need Boost libraries for the Mac. See below for how to build the Boost libraries.
 
 In src/mac, execute sudo make setup.
-This creates a build directory mbuild parallel to the CVS files, and creates links
-from /Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/site-packages to
-the visual directory in the git files.
+This creates a build directory mbuild parallel to the git files.
 
-In the mbuild directory, execute sudo make install to build and install Visual.
-This creates cvisual.so in the git site-packages/visual directory, which is
-linked as explained above, ready to run.
+In the mbuild directory, execute "sudo make" to build Visual.
+This creates cvisual.so. To install it, run "sudo make install".
 
-In site-packages/vidle, execute "python MacBuildApp.py build" to build an app to drive VIDLE,
+In site-packages/vidle, you can execute "python MacBuildApp.py build" to build an app to drive VIDLE,
 an updated alternative to the IDLE shipped with Python. However, the resulting launcher seems
 to be not very robust and the resulting launcher has been modified and is found in
 src/mac/PackageMaker/VIDLE_launcher.zip. 
@@ -96,13 +95,13 @@ Be sure to set the project status to require OSX 10.4 and above.
 
 BUILDING BOOST LIBRARIES
 The Boost libraries were built by downloading the source.
-cd to the Boost directory and execute
 
 The Python 3.2 installer places the Python includes in
 /Library/Frameworks/Python.framework/Versions/3.2/include/python3.2m instead of ....python3.2.
-This leads to building a failure in building the Boost libraries. You need to make a copy of
+This leads to a failure in building the Boost libraries. You need to make a copy of
 include/python3.2m -> include/python3.2 in order for the following procedure to work.
 
+cd to the Boost directory and execute
 ./bootstrap.sh --with-toolset=gcc --with-python-version=3.2 --with-python-root=/Library/Frameworks/Python.framework/Versions/3.2 --with-python=python3.2 --with-libraries=python,signals,thread
 
 to create the bjam tool and project-config.jam.
@@ -112,49 +111,19 @@ Run the new python in a terminal and see what compiler was used to build it. If 
 If it was 4.2, do this:
    In the file project-config.jam, change "using gcc ;" to "using gcc : 4.2 : g++-4.2 ;"
 The purpose is to build Boost libraries using the same compiler used to build Python and Visual.
-Early versions of Python used 4.0, later ones 4.2. 
+Early versions of Python distributed at python.org used 4.0, later ones 4.2. 
 
 Now execute ./bjam to build the Boost libraries for 32-bit Python.
 
-The files you want will be in stage/lib.
-Move the following files to dependencies/boost_files/mac_libs:
+The files you want will be in stage/lib. Move the following files to  dependencies/boost_files/mac_libs:
 libboost_python.a
 libboost_signals.a
 libboost_thread.a
+Also move the boost folder to dependencies/boost_files/boost
 
-Note that address-model=32 architecture=x86 instruction-set=i386 can be used with bjam to force 32-bit compilation.
+(Note that address-model=32 architecture=x86 instruction-set=i386 can be used with bjam to force 32-bit compilation.)
 
-Alas, despite many permutations of trying to build Boost and VPython for the 32-bit version of Python3.2, I get these errors:
-ld: warning: in wrap_vector.o, file was built for i386 which is not the architecture being linked (x86_64)
-ld: warning: in ../VPython_GitHub//dependencies/boost_files/mac_libs/libboost_python.a, file was built for unsupported file format which is not the architecture being linked (x86_64)
 Up to and including Python3.1, the Python executoable was built for ppc and i386.
-The "32-bit" version of Python3.2 was built for x86_64 and i386, which apparently has consequences for building Boost and VPython.
-
-In the past the following was used, but it seems neither necessary nor sufficient with Python 2.7:
----------------------
-./bjam --toolset=darwin -sPYTHON_ROOT=/Library/Frameworks/Python.framework/Versions/2.7/bin/python --address-model=32_64 --architecture=x86 --build-type=complete --layout=versioned --with-python --with-thread --with-signals stage
-
-The files you want will be in stage/lib.
-Move these files to dependencies/boost_files/mac_libs (file names will be similar to the following):
-libboost_python-mt-s-1_35.a
-libboost_signals-mt-s-1_35.a
-libboost_thread-mt-s-1_35.a
-----------------------
-
-----------
-I built Boost libraries on a PowerPC running OS X 10.4 and tried using them
-on a PowerPC running OS X 10.5. Example programs ran okay, but in each case
-there was the following warning. In retrospect there may have been confusion
-between two different Python 2.5's on the machine.
-
-Warning (from warnings module):
-  File "/Library/Python/2.5/site-packages/visual/__init__.py", line 149
-    import cvisual
-RuntimeWarning: Python C API version mismatch for module cvisual: 
-This Python has API version 1013, module cvisual has version 1012.
-
-After rebuilding the Boost libraries on a PowerPC running OS X 10.5 this
-warning went away.
 
 ------------------------------------------------------
 Obsolete, of historical interest only: HOW TO BUILD VISUAL 4 ON Apple OSX using GTK2 (Version 10.4.x)
