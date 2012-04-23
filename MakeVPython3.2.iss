@@ -6,7 +6,7 @@
 
 [Setup]
 AppName=VPython for Python 3.2
-AppVerName=VPython 5.73
+AppVerName=VPython 5.74
 AppPublisherURL=http://vpython.org
 DefaultDirName={code:MyConst}
 
@@ -14,7 +14,7 @@ SourceDir=C:\Python32
 DisableProgramGroupPage=yes
 DirExistsWarning=no
 DisableStartupPrompt=yes
-OutputBaseFilename=VPython-Win-Py3.2-5.73
+OutputBaseFilename=VPython-Win-Py3.2-5.74
 OutputDir=c:\workspace
 
 [Files]
@@ -62,13 +62,13 @@ Source: "Lib\site-packages\vidle\*.icns"; DestDir: "{app}\Lib\site-packages\vidl
 Source: "Lib\site-packages\visual\examples\*.py"; DestDir: "{app}\Lib\site-packages\visual\examples\"; Components: Examples
 Source: "Lib\site-packages\visual\examples\*.tga"; DestDir: "{app}\Lib\site-packages\visual\examples\"; Components: Examples
 
-Source: "c:\workspace\vpython-core2\docs\index.html"; DestDir: "{app}\Lib\site-packages\visual\docs\"; Components: Documentation
-Source: "c:\workspace\vpython-core2\docs\visual\*.html"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
-Source: "c:\workspace\vpython-core2\docs\visual\*.txt"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
-Source: "c:\workspace\vpython-core2\docs\visual\*.pdf"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
-Source: "c:\workspace\vpython-core2\docs\visual\*.gif"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
-Source: "c:\workspace\vpython-core2\docs\visual\*.css"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
-Source: "c:\workspace\vpython-core2\docs\visual\images\*.jpg"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\images"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\index.html"; DestDir: "{app}\Lib\site-packages\visual\docs\"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\visual\*.html"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\visual\*.txt"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\visual\*.pdf"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\visual\*.gif"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\visual\*.css"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\"; Components: Documentation
+Source: "c:\workspace\VPython_GitHub_Docs\visual\images\*.jpg"; DestDir: "{app}\Lib\site-packages\visual\docs\visual\images"; Components: Documentation
 
 [Components]
 Name: Visual; Description: "The Visual extension module for Python"; Types: full compact custom; Flags: fixed
