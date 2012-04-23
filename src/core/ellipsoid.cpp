@@ -89,7 +89,7 @@ ellipsoid::degenerate()
 double
 ellipsoid::get_max_dimension()
 {
-	return std::max(axis.mag(), std::max(width, height));
+	return 0.5*std::max(axis.mag(), std::max(width, height));
 }
 
 void
