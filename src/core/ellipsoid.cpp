@@ -86,6 +86,12 @@ ellipsoid::degenerate()
 	return !visible || height == 0.0 || width == 0.0 || axis.mag() == 0.0;
 }
 
+double
+ellipsoid::get_max_dimension()
+{
+	return std::max(axis.mag(), std::max(width, height));
+}
+
 void
 ellipsoid::grow_extent( extent& world)
 {

@@ -44,6 +44,12 @@ sphere::gl_pick_render( const view& geometry)
 	check_gl_error();
 }
 
+double
+sphere::get_max_dimension()
+{
+	return radius;
+}
+
 void
 sphere::gl_render( const view& geometry)
 {
@@ -54,8 +60,9 @@ sphere::gl_render( const view& geometry)
 
 	clear_gl_error();
 	
+
 	// coverage is the radius of this sphere in pixels:
-	double coverage = geometry.pixel_coverage( pos, radius);
+	double coverage = geometry.pixel_coverage( pos, get_max_dimension());
 	int lod = 0;
 	
 	if (coverage < 0) // Behind the camera, but still visible.

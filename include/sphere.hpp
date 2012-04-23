@@ -32,6 +32,9 @@ class sphere : public axial
 	virtual ~sphere();
  
  protected:
+	// Return radius for sphere, max dimension for ellipsoid:
+	virtual double get_max_dimension();
+
 	/** Renders a simple sphere with the #2 level of detail.  */
 	virtual void gl_pick_render( const view&);
 	/** Renders the sphere.  All of the spheres share the same basic set of 

@@ -32,6 +32,9 @@ class ellipsoid : public sphere
 	void set_size( const vector&);	
 	
  protected:
+	// Return radius for sphere, max dimension for ellipsoid:
+	virtual double get_max_dimension();
+
 	virtual vector get_scale();
 	virtual void grow_extent( extent&);
 	virtual bool degenerate();
