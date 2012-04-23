@@ -13,10 +13,12 @@ config.log
 aclocal.m4
 compile
 config.guess
+config.status
 config.sub
 configure
 docs
 install-sh
+libtool
 ltmain.sh
 Makefile
 Makefile.in
