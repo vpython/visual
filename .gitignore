@@ -8,8 +8,10 @@
 *.DS_Store
 .sconf_temp
 .sconsign
+autom4te.cache
 config.log
 aclocal.m4
+compile
 config.guess
 config.sub
 configure
@@ -17,6 +19,7 @@ docs
 install-sh
 ltmain.sh
 Makefile
+Makefile.in
 missing
 mkinstalldirs
 py-compile
