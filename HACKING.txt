@@ -1,9 +1,13 @@
-VPython CVS is maintained at github.com/vpython, where there
+VPython is maintained at github.com/vpython, where there
 are two components: visual contains the main files, and
 vpython.docs contains the documentation files.
 
+To build from scratch, copy the files from the github visual folder into a
+new folder named (say) source. Create a folder "docs" in source, and copy
+into docs the files from the github vpython.docs folder. Build in Source.
+
    Set the version number appropriately in configure.ac, 
-   and in the first line of __init__.py.
+   and in the first line of site-packages/vis/__init__.py.
 
 Windows and Mac builds are now special to them; 
 see VCBuild/VCBuild.txt and MAC-OSX.txt.

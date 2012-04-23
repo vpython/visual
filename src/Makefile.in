@@ -70,7 +70,7 @@ CVISUAL_OBJS = atomic_queue.lo displaylist.lo errors.lo extent.lo \
 	ellipsoid.lo extrusion.lo frame.lo label.lo light.lo material.lo \
 	mouse_manager.lo mouseobject.lo primitive.lo pyramid.lo rectangular.lo \
 	renderable.lo ring.lo sphere.lo text.lo \
-	display.lo font_renderer.lo random_device.lo render_surface.lo timer.lo\
+	display.lo font_renderer.lo render_surface.lo timer.lo\
 	arrayprim.lo convex.lo curve.lo cvisualmodule.lo faces.lo num_util.lo \
 	numeric_texture.lo points.lo slice.lo \
 	wrap_arrayobjects.lo wrap_display_kernel.lo \
