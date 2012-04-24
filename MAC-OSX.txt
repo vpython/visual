@@ -96,6 +96,9 @@ Be sure to set the project status to require OSX 10.4 and above.
 BUILDING BOOST LIBRARIES
 The Boost libraries were built by downloading the source.
 
+Be sure to set up the link /Library/Frameworks/Python.framework/Versions/Current as discussed
+above before attempting to build the Boost libraries.
+
 The Python 3.2 installer places the Python includes in
 /Library/Frameworks/Python.framework/Versions/3.2/include/python3.2m instead of ....python3.2.
 This leads to a failure in building the Boost libraries. You need to make a copy of

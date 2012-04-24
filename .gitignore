@@ -5,6 +5,8 @@
 *.so
 *.os
 *.xml
+*.pmdoc
+*.xml
 *.DS_Store
 .sconf_temp
 .sconsign
