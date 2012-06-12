@@ -1,6 +1,7 @@
 CVISUAL_0_0 {
 	global:
 		initcvisual;
+		PyInit_cvisual;
 	local:
 		*;
 };
